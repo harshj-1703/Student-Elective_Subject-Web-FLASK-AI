@@ -12,9 +12,19 @@
     <h1>Elective Subject Recommendation System</h1>
     <form action="/" method="get" onsubmit="return validateSemester()">
         <label for="">Enter Semester:</label>
-        <input type="number" name="semester" required/>
+        <select name="semester" required id="semester-select">
+            <option value="">Select Semester</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+        </select>
         <label for="">Enter Description:</label>
-        <input type="text" name="description" required/>
+        <textarea name="description" required rows="3"></textarea>
         <input type="submit" value="Recommend">
         {% if error %}
         <p id="semester-error" style="color: red;">{{ error }}</p>

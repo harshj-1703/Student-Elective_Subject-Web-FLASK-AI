@@ -17,7 +17,7 @@ form {
     align-items: center;
     justify-content: center;
     margin: 0 auto;
-    width: 30%;
+    width: 40%;
     background-color: #f2f2f2;
     padding: 20px;
     border-radius: 10px;
@@ -37,14 +37,23 @@ label {
     margin-bottom: 10px;
 }
 
-input[type="number"], input[type="text"] {
+select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  width: 200px;
+}
+
+textarea {
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-bottom: 20px;
-    width: 300px;
-}
+    width: 500px;
+  }
 
 input[type="submit"] {
     background-color: #007bff;
