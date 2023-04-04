@@ -43,7 +43,7 @@ def results():
         c_des.append(request.args.get('description'))
         embeddings = model.encode(c_des)
         array_len = len(np.array(embeddings))
-        print(array_len)
+        # print(array_len)
         for i in range(0,array_len):
             cosine = np.dot(np.array(embeddings)[array_len-1],np.array(embeddings)[i])/(norm(np.array(embeddings)[array_len-1])*norm(np.array(embeddings)[i]))
             cosine_similarities.append(cosine)
