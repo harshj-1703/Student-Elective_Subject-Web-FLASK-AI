@@ -8,13 +8,19 @@
     <link rel="stylesheet" href="../static/css/index.css">
 </head>
 <body>
+    <div id="loader"></div>
     <h1>Elective Subject Recommendation System</h1>
-    <form action="/" method="get">
+    <form action="/" method="get" onsubmit="return validateSemester()">
         <label for="">Enter Semester:</label>
-        <input type="number" name="semester">
+        <input type="number" name="semester" required/>
         <label for="">Enter Description:</label>
-        <input type="text" name="description">
+        <input type="text" name="description" required/>
         <input type="submit" value="Recommend">
+        {% if error %}
+        <p id="semester-error" style="color: red;">{{ error }}</p>
+        {% else %}
+        <p id="semester-error"></p>
+        {% endif %}
     </form>
     {% if output_sem is defined and output_des is defined %}
     <div class="recommendation">
@@ -46,4 +52,23 @@
         </div>
     {% endif %}
 </body>
+<script>
+window.addEventListener("load", function() {
+const loader = document.getElementById("loader");
+loader.style.display = "none";
+});
+
+function validateSemester() {
+  const semesterInput = document.getElementById('semester');
+  const semester = parseInt(semesterInput.value);
+  const semesterError = document.getElementById('semester-error');
+
+  if (isNaN(semester) || semester < 1 || semester > 8) {
+    semesterError.textContent = 'Semester must be a number between 1 and 8';
+    return false;
+  }
+
+  return true;
+}
+</script>
 </html>

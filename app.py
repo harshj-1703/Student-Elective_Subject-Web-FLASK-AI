@@ -27,6 +27,13 @@ def checkIndexOrNot(output1,chain_zip):
     value = chain_zip.get(output1, 0)
     return value
 
+def validate_semester(semester):
+    try:
+        semester = int(semester)
+    except ValueError:
+        return False
+    return semester >= 1 and semester <= 8
+
 # initializing flask
 app = Flask('ElectiveRecommendation')
 
@@ -36,6 +43,9 @@ def results():
     cosine_similarities = []
     embeddings = []
     if request.args.get('semester') is not None and request.args.get('description') != '':
+        if not validate_semester(request.args.get('semester')):
+            error = 'Semester must be a number between 1 and 8'
+            return render_template('index.html', error=error)
         c_des.append(request.args.get('description'))
         embeddings = model.encode(c_des)
         array_len = len(np.array(embeddings))
@@ -74,7 +84,6 @@ def results():
         user_sem = int(request.args.get('semester'))
         final = [{k:v} for k,v in final_chain.items() if v >= user_sem]
         output_dict = {k: v for d in final for k, v in d.items()}
-        # if(user_sem > output1_sem):
         if(output1 in output_dict):
             del output_dict[output1]
             output = sorted(output_dict)
@@ -88,7 +97,6 @@ def results():
             output.pop()
         semester = request.args.get('semester')
         description = request.args.get('description')
-        # predicted_stock_price = model.predict(year)
         return render_template('index.html', semester=semester, description=description, output_des=output1, output_sem=output1_sem,output_dict=output_dict)
     
     else:
