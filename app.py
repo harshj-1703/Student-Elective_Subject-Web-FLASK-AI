@@ -29,36 +29,18 @@ def results():
         cosine_similarities.append(cosine)
     cosine_similarities.pop()
     index = cosine_similarities.index(max(cosine_similarities))
-    chain1=["Advanced Microprocessor","Embedded System Design","VLSI Designs","Digital Design using Verilog","VLSI Physical Design","FPGA Based System Design","Embedded Linux","Internet of Things"]
-    chain1_sem=[5,6,6,7,8,8,8,7]
-    chain2=["Optical Communication","RF and Microwave Communication","Satellite Communication","Wireless system Design","Multimedia computing","Spread Spectrum communications"]
-    chain2_sem=[5,6,6,7,7,8]
-    chain3=["Linux Administration","Cloud Computing","Embedded Operating System","Introduction to DevOps Tools","Network Administration","Advanced Computer Networks"]
-    chain3_sem=[5,6,7,8,8,6]
-    chain4=["Applied Linear algebra","Machine learning","Data Warehousing and Data mining","Big Data Analytics","Computer Vision","Human computer interaction","Data Visualization","Deep Learning for Computer Vision"]
-    chain4_sem=[5,6,6,7,7,7,8,8]
-    chain5=["Theory of Computation","Compiler Design"]
-    chain5_sem=[5,6]
-    chain6=[".NET Technology","Advance Web Technology"]
-    chain6_sem=[6,8]
-    chain7=["Programming for Application Development","Cross Platform Mobile Development"]
-    chain7_sem=[7,8]
-    chain8=["Game Development"]
-    chain8_sem=[8]
-    chain9=["Advance Java","Advance Database","Advance C++ Programming"]
-    chain9_sem=[7,8,8]
-    chain10=["SEO And Digital Marketing"]
-    chain10_sem=[8]
-    chain1_zip = dict(zip(chain1,chain1_sem))
-    chain2_zip = dict(zip(chain2,chain2_sem))
-    chain3_zip = dict(zip(chain3,chain3_sem))
-    chain4_zip = dict(zip(chain4,chain4_sem))
-    chain5_zip = dict(zip(chain5,chain5_sem))
-    chain6_zip = dict(zip(chain6,chain6_sem))
-    chain7_zip = dict(zip(chain7,chain7_sem))
-    chain8_zip = dict(zip(chain8,chain8_sem))
-    chain9_zip = dict(zip(chain9,chain9_sem))
-    chain10_zip = dict(zip(chain10,chain10_sem)) 
+
+    chain1={"Advanced Microprocessor" : 5,"Embedded System Design" : 6,"VLSI Designs" : 6,"Digital Design using Verilog" : 7,"VLSI Physical Design" :8,"FPGA Based System Design" :8,"Embedded Linux" :8,"Internet of Things":7}
+    chain2={"Optical Communication" : 5,"RF and Microwave Communication" : 6,"Satellite Communication" : 6,"Wireless system Design" : 7,"Multimedia computing" : 7,"Spread Spectrum communications" : 8}
+    chain3={"Linux Administration" : 5,"Cloud Computing" : 6,"Embedded Operating System" : 7,"Introduction to DevOps Tools" : 8,"Network Administration" : 8,"Advanced Computer Networks" : 6}
+    chain4={"Applied Linear algebra" : 5,"Machine learning" : 6,"Data Warehousing and Data mining" : 6,"Big Data Analytics" : 7,"Computer Vision" : 7,"Human computer interaction" : 7,"Data Visualization" : 8,"Deep Learning for Computer Vision" : 8}
+    chain5={"Theory of Computation" : 5,"Compiler Design" : 6}
+    chain6={".NET Technology" : 6,"Advance Web Technology" : 8}
+    chain7={"Programming for Application Development" : 7,"Cross Platform Mobile Development" : 8}
+    chain8={"Game Development" : 8}
+    chain9={"Advance Java" : 7,"Advance Database" : 8,"Advance C++ Programming" : 8}
+    chain10={"SEO And Digital Marketing" : 8}
+
     output1 = courses_dataset['Course Name'][index]
     output1_sem = courses_dataset['Semester'][index]
 
@@ -66,26 +48,26 @@ def results():
         value = chain_zip.get(output1, 0)
         return value
 
-    if(checkIndexOrNot(output1,chain1_zip) != 0):
-        final_chain = chain1_zip
-    elif(checkIndexOrNot(output1,chain2_zip) != 0):
-        final_chain = chain2_zip
-    elif(checkIndexOrNot(output1,chain3_zip) != 0):
-        final_chain = chain3_zip
-    elif(checkIndexOrNot(output1,chain4_zip) != 0):
-        final_chain = chain4_zip
-    elif(checkIndexOrNot(output1,chain5_zip) != 0):
-        final_chain = chain5_zip
-    elif(checkIndexOrNot(output1,chain6_zip) != 0):
-        final_chain = chain6_zip
-    elif(checkIndexOrNot(output1,chain7_zip) != 0):
-        final_chain = chain7_zip
-    elif(checkIndexOrNot(output1,chain8_zip) != 0):
-        final_chain = chain8_zip
-    elif(checkIndexOrNot(output1,chain9_zip) != 0):
-        final_chain = chain9_zip
+    if(checkIndexOrNot(output1,chain1) != 0):
+        final_chain = chain1
+    elif(checkIndexOrNot(output1,chain2) != 0):
+        final_chain = chain2
+    elif(checkIndexOrNot(output1,chain3) != 0):
+        final_chain = chain3
+    elif(checkIndexOrNot(output1,chain4) != 0):
+        final_chain = chain4
+    elif(checkIndexOrNot(output1,chain5) != 0):
+        final_chain = chain5
+    elif(checkIndexOrNot(output1,chain6) != 0):
+        final_chain = chain6
+    elif(checkIndexOrNot(output1,chain7) != 0):
+        final_chain = chain7
+    elif(checkIndexOrNot(output1,chain8) != 0):
+        final_chain = chain8
+    elif(checkIndexOrNot(output1,chain9) != 0):
+        final_chain = chain9
     else:
-        final_chain = chain10_zip
+        final_chain = chain10
 
     user_sem = int(request.form['semester'])
     final = [{k:v} for k,v in final_chain.items() if v >= user_sem]
@@ -119,8 +101,7 @@ def results():
     semester = request.form['semester']
     description = request.form['description']
     # predicted_stock_price = model.predict(year)
-    return render_template('result.html', semester=semester, description=description, output_des=output1, output_sem=output1_sem, output_dict = output)
-
+    return render_template('result.html', semester=semester, description=description, output_des=output1, output_sem=output1_sem)
 
 # run file
 app.run("localhost", "9999", debug=True)
