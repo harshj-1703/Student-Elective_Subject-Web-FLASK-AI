@@ -5,20 +5,45 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elective Subject Recommendation</title>
+    <link rel="stylesheet" href="../static/css/index.css">
 </head>
 <body>
-    <form action="/results" method="get">
-        <label for="">Enter Semester : </label>
+    <h1>Elective Subject Recommendation System</h1>
+    <form action="/" method="get">
+        <label for="">Enter Semester:</label>
         <input type="number" name="semester">
-        <label for="">Enter Description : </label>
+        <label for="">Enter Description:</label>
         <input type="text" name="description">
         <input type="submit" value="Recommend">
     </form>
-
-    Semester : {{semester}} <br>
-    Description : {{description}}<br>
-    Output Semester : {{output_sem}}<br>
-    Output Description : {{output_des}}<br>
-    Output Dictionary : {{output_dict}}<br>
+    {% if output_sem is defined and output_des is defined %}
+    <div class="recommendation">
+        <h2>{{ output_des }} - Semester {{ output_sem }}</h2>
+        <p>is your recommended subject</p>
+    </div>
+    {% endif %}
+    {% if output_dict is defined %}
+    <div class="suggested">
+        <h2>Another Suggested Subjects</h2>
+        <table>
+            <thead>
+                <tr style="font-weight: bold;">
+                    <td>Subject Name</td>
+                    <td>Subject Semester</td>
+                    <td>FeedBack</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for key, value in output_dict.items() %}
+                    <tr>
+                        <td>{{ key }}</td>
+                        <td>{{ value }}</td>
+                        <td>give</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
 </body>
 </html>

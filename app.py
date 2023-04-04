@@ -20,6 +20,7 @@ chain6 = data['chain6']
 chain7 = data['chain7']
 chain8 = data['chain8']
 chain9 = data['chain9']
+chain10 = data['chain10']
 cosine_similarities = []
 
 # function
@@ -34,7 +35,7 @@ app = Flask('ElectiveRecommendation')
 # def show_predict_stock_form():
 #     return render_template('index.html')
 
-@app.route('/results',methods=['POST','GET'])
+@app.route('/',methods=['POST','GET'])
 def results():
     # form = request.form
     cosine_similarities = []

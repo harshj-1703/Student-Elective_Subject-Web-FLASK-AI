@@ -34,7 +34,8 @@ data = {'courses_dataset': courses_dataset,
         'chain6': chain6,
         'chain7': chain7,
         'chain8': chain8,
-        'chain9': chain9}
+        'chain9': chain9,
+        'chain10': chain10}
 
 with open('model.pickle', 'wb') as f:
   pickle.dump(data, f)

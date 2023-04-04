@@ -1,0 +1,154 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 30%;
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+body {
+    background-image: url("../images/giphy.gif");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }  
+
+label {
+    margin-right: 10px;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+input[type="number"], input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    width: 300px;
+}
+
+input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #0062cc;
+  }
+  
+table {
+    border-collapse: collapse;
+    width: 80%;
+    margin: auto;
+    margin-top: 30px;
+}
+
+th {
+    background-color: #0056b3;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-size: 20px;
+}
+
+td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    font-size: 18px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Styles for the recommended subject and semester */
+.recommendation {
+    margin: 50px auto;
+    max-width: 800px;
+    text-align: center;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 4px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.recommendation h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.recommendation p {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+/* Styles for the table of another suggested subjects */
+.suggested {
+    margin: 50px auto;
+    max-width: 800px;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 4px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.suggested h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.suggested table {
+    margin-top: 20px;
+}
+
+.suggested th {
+    background-color: #0056b3;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-size: 20px;
+}
+
+.suggested td {
+border: 1px solid #ddd;
+padding: 10px;
+text-align: center;
+font-size: 18px;
+}
+
+.suggested tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+form {
+    background-color: #f2f2f2;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+  }
