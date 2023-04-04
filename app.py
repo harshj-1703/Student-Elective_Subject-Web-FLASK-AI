@@ -1,14 +1,30 @@
-# inport library
 from flask import Flask, render_template, request
+import pickle
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-from sentence_transformers import SentenceTransformer
 from numpy.linalg import norm
 
-courses_dataset = pd.read_excel('./model train files/Elective Courses.xlsx')
-c_des = list(courses_dataset['Description'])
-model = SentenceTransformer('all-MiniLM-L6-v2')
+with open('model.pickle', 'rb') as f:
+    data = pickle.load(f)
+
+courses_dataset = data['courses_dataset']
+c_des = data['c_des']
+model = data['model']
+chain1 = data['chain1']
+chain2 = data['chain2']
+chain3 = data['chain3']
+chain4 = data['chain4']
+chain5 = data['chain5']
+chain6 = data['chain6']
+chain7 = data['chain7']
+chain8 = data['chain8']
+chain9 = data['chain9']
+cosine_similarities = []
+
+# function
+def checkIndexOrNot(output1,chain_zip):
+    value = chain_zip.get(output1, 0)
+    return value
 
 # initializing flask
 app = Flask('ElectiveRecommendation')
@@ -17,36 +33,20 @@ app = Flask('ElectiveRecommendation')
 def show_predict_stock_form():
     return render_template('index.html')
 
-@app.route('/results', methods=['POST'])
+@app.route('/results',methods=['POST','GET'])
 def results():
-    form = request.form
+    # form = request.form
     c_des.append(request.form['description'])
     embeddings = model.encode(c_des)
     array_len = len(np.array(embeddings))
-    cosine_similarities = []
     for i in range(0,array_len):
         cosine = np.dot(np.array(embeddings)[array_len-1],np.array(embeddings)[i])/(norm(np.array(embeddings)[array_len-1])*norm(np.array(embeddings)[i]))
         cosine_similarities.append(cosine)
     cosine_similarities.pop()
     index = cosine_similarities.index(max(cosine_similarities))
-
-    chain1={"Advanced Microprocessor" : 5,"Embedded System Design" : 6,"VLSI Designs" : 6,"Digital Design using Verilog" : 7,"VLSI Physical Design" :8,"FPGA Based System Design" :8,"Embedded Linux" :8,"Internet of Things":7}
-    chain2={"Optical Communication" : 5,"RF and Microwave Communication" : 6,"Satellite Communication" : 6,"Wireless system Design" : 7,"Multimedia computing" : 7,"Spread Spectrum communications" : 8}
-    chain3={"Linux Administration" : 5,"Cloud Computing" : 6,"Embedded Operating System" : 7,"Introduction to DevOps Tools" : 8,"Network Administration" : 8,"Advanced Computer Networks" : 6}
-    chain4={"Applied Linear algebra" : 5,"Machine learning" : 6,"Data Warehousing and Data mining" : 6,"Big Data Analytics" : 7,"Computer Vision" : 7,"Human computer interaction" : 7,"Data Visualization" : 8,"Deep Learning for Computer Vision" : 8}
-    chain5={"Theory of Computation" : 5,"Compiler Design" : 6}
-    chain6={".NET Technology" : 6,"Advance Web Technology" : 8}
-    chain7={"Programming for Application Development" : 7,"Cross Platform Mobile Development" : 8}
-    chain8={"Game Development" : 8}
-    chain9={"Advance Java" : 7,"Advance Database" : 8,"Advance C++ Programming" : 8}
-    chain10={"SEO And Digital Marketing" : 8}
-
+    
     output1 = courses_dataset['Course Name'][index]
     output1_sem = courses_dataset['Semester'][index]
-
-    def checkIndexOrNot(output1,chain_zip):
-        value = chain_zip.get(output1, 0)
-        return value
 
     if(checkIndexOrNot(output1,chain1) != 0):
         final_chain = chain1
@@ -95,13 +95,12 @@ def results():
         #     for i,j in output_dict.items():
         #         print("Also you can select similer subject like :",i,"from semester : ",j,"th")
 
-    # if request.method == 'POST':
     #   #write your function that loads the model
     #   model = get_model() #you can use pickle to load the trained model
     semester = request.form['semester']
     description = request.form['description']
     # predicted_stock_price = model.predict(year)
-    return render_template('result.html', semester=semester, description=description, output_des=output1, output_sem=output1_sem)
+    return render_template('result.html', semester=semester, description=description, output_des=output1, output_sem=output1_sem,output_dict=output_dict)
 
 # run file
 app.run("localhost", "9999", debug=True)
