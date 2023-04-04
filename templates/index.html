@@ -7,12 +7,18 @@
     <title>Elective Subject Recommendation</title>
 </head>
 <body>
-    <form action="/results" method="post">
+    <form action="/results" method="get">
         <label for="">Enter Semester : </label>
         <input type="number" name="semester">
         <label for="">Enter Description : </label>
         <input type="text" name="description">
         <input type="submit" value="Recommend">
     </form>
+
+    Semester : {{semester}} <br>
+    Description : {{description}}<br>
+    Output Semester : {{output_sem}}<br>
+    Output Description : {{output_des}}<br>
+    Output Dictionary : {{output_dict}}<br>
 </body>
 </html>
