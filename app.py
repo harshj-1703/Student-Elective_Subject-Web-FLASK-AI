@@ -3,7 +3,6 @@ import pickle
 import numpy as np
 import pandas as pd
 from numpy.linalg import norm
-from json import dump
 
 with open('model.pickle', 'rb') as f:
     data = pickle.load(f)
@@ -30,10 +29,6 @@ def checkIndexOrNot(output1,chain_zip):
 
 # initializing flask
 app = Flask('ElectiveRecommendation')
-
-# @app.route('/')
-# def show_predict_stock_form():
-#     return render_template('index.html')
 
 @app.route('/',methods=['POST','GET'])
 def results():
@@ -83,12 +78,6 @@ def results():
         if(output1 in output_dict):
             del output_dict[output1]
             output = sorted(output_dict)
-            # output.pop()
-            # output1 = 
-            # print("\n---------------------------------\nYou can select subject : ",output1," in sem : ",output1_sem,"th")
-            # if(output_dict != {}):
-            #     for i,j in output_dict.items():
-            #         print("Also you can select similer subject like :",i,"from semester : ",j,"th")
 
         else:
             output = sorted(output_dict)
@@ -97,13 +86,6 @@ def results():
                 output1_sem = new_val
                 break
             output.pop()
-            # print("\n---------------------------------\nYou can select subject : ",output1," in sem : ",output1_sem,"th")
-            # if(output_dict != {}):
-            #     for i,j in output_dict.items():
-            #         print("Also you can select similer subject like :",i,"from semester : ",j,"th")
-
-        #   #write your function that loads the model
-        #   model = get_model() #you can use pickle to load the trained model
         semester = request.args.get('semester')
         description = request.args.get('description')
         # predicted_stock_price = model.predict(year)

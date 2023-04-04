@@ -22,7 +22,7 @@
         <p>is your recommended subject</p>
     </div>
     {% endif %}
-    {% if output_dict is defined %}
+    {% if output_dict is defined and output_dict|length > 0 %}
     <div class="suggested">
         <h2>Another Suggested Subjects</h2>
         <table>
@@ -43,7 +43,7 @@
                 {% endfor %}
             </tbody>
         </table>
-    </div>
+        </div>
     {% endif %}
 </body>
 </html>
