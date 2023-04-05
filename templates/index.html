@@ -34,18 +34,21 @@
     <form action="/addfeedback" method="post">
     {% if output_sem is defined and output_des is defined %}
     <div class="recommendation">
+        <input type="hidden" name="user_description" value="{{description}}"/>
+        <input type="hidden" name="recommended_sem" value="{{output_sem}}"/>
+        <input type="hidden" name="recommended_des" value="{{output_des}}"/>
         <h2>{{ output_des }} - Semester {{ output_sem }}</h2>
         <p>is your recommended subject</p>
         <div class="rating">
-            <input type="radio" id="star5_{{ output_des }}" name="main_rating" value="5">
+            <input type="radio" id="star5_{{ output_des }}" name="{{ output_des }}" value="5">
             <label for="star5_{{ output_des }}"></label>
-            <input type="radio" id="star4_{{ output_des }}" name="main_rating" value="4">
+            <input type="radio" id="star4_{{ output_des }}" name="{{ output_des }}" value="4">
             <label for="star4_{{ output_des }}"></label>
-            <input type="radio" id="star3_{{ output_des }}" name="main_rating" value="3">
+            <input type="radio" id="star3_{{ output_des }}" name="{{ output_des }}" value="3">
             <label for="star3_{{ output_des }}"></label>
-            <input type="radio" id="star2_{{ output_des }}" name="main_rating" value="2">
+            <input type="radio" id="star2_{{ output_des }}" name="{{ output_des }}" value="2">
             <label for="star2_{{ output_des }}"></label>
-            <input type="radio" id="star1_{{ output_des }}" name="main_rating" value="1">
+            <input type="radio" id="star1_{{ output_des }}" name="{{ output_des }}" value="1">
             <label for="star1_{{ output_des }}"></label>
         </div>
     </div>
@@ -89,9 +92,9 @@
     <div class="suggestion">
         <h2>Give FeedBack and Suggestion</h2>
         <label for="">Enter Your Name :</label>
-        <input type="text" name="feedbackname" id="feedbackname" required maxlength="100">
+        <input type="text" name="user_name" id="feedbackname" required maxlength="100">
         <label for="">Enter FeedBack :</label>
-        <textarea name="suggestion" required rows="3" oninput="limitTextarea(this)" maxlength="250"></textarea>
+        <textarea name="user_suggestion" required rows="3" oninput="limitTextarea(this)" maxlength="250"></textarea>
         <input type="submit" value="Give Suggestion">
     </div>
     {% endif %}

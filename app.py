@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 from numpy.linalg import norm
 from pymongo import MongoClient
+import json
 
 client = MongoClient('mongodb://localhost:27017/')
 db = client['ai_elective_subject']
@@ -119,8 +120,13 @@ def results():
 @app.route('/addfeedback', methods=['POST','GET'])
 def add_addfeedback():
     if request.method == "POST":
-        feedbackname = request.form['feedbackname']
-        collection.insert_one({'name' : feedbackname})
+        # print(request.form)
+        # feedbackname = request.form['feedbackname']
+        # suggestion = request.form['suggestion']
+        
+        dict_data = dict(request.form)
+        dict_data.pop('[]', None)
+        collection.insert_one(dict_data)
         message = "Feedback added successfully"
         return render_template('index.html',message_feedback=message)
     if request.method == "GET":
