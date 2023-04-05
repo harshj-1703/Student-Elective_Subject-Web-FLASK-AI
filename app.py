@@ -79,10 +79,9 @@ def results():
         description = model.encode(description)
         cosine_similarities = util.dot_score(description, trained_des)
         index = (np.argmax(cosine_similarities)).item()
-        print(index)
+        # print(index)
         output1 = courses_dataset['Course Name'][index]
         output1_sem = courses_dataset['Semester'][index]
-
 
         if(checkIndexOrNot(output1,chain1) != 0):
             final_chain = chain1
