@@ -16,7 +16,16 @@ h1 {
     font-variant: small-caps;
 }
 
-form {
+h3 {
+    text-align: center;
+    margin-top: 20px;
+    font-family:'Courier New', Courier, monospace;
+    color: #ff5e01;
+    letter-spacing: 2px;
+    font-weight: 900;
+}
+
+#form1 {
     display: flex;
     flex-direction: column;
     align-items: center;

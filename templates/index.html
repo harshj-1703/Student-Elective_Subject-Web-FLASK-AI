@@ -11,6 +11,9 @@
 <body>
     <div id="loader"></div>
     <h1>Elective Subject Recommendation System</h1>
+    {% if message_feedback is defined %}
+    <h3>{{ message_feedback }}</h3>
+    {% endif %}
     <form action="/" method="get" id="form1">
         <label for="">Enter Semester:</label>
         <select name="semester" required id="semester-select">
@@ -28,21 +31,21 @@
         <textarea name="description" required rows="3" oninput="limitTextarea(this)" maxlength="250"></textarea>
         <input type="submit" value="Recommend">
     </form>
-    <!-- <form action=""> -->
+    <form action="/addfeedback" method="post">
     {% if output_sem is defined and output_des is defined %}
     <div class="recommendation">
         <h2>{{ output_des }} - Semester {{ output_sem }}</h2>
         <p>is your recommended subject</p>
         <div class="rating">
-            <input type="radio" id="star5_{{ output_des }}" name="main_rating" value="5" required>
+            <input type="radio" id="star5_{{ output_des }}" name="main_rating" value="5">
             <label for="star5_{{ output_des }}"></label>
-            <input type="radio" id="star4_{{ output_des }}" name="main_rating" value="4" required>
+            <input type="radio" id="star4_{{ output_des }}" name="main_rating" value="4">
             <label for="star4_{{ output_des }}"></label>
-            <input type="radio" id="star3_{{ output_des }}" name="main_rating" value="3" required>
+            <input type="radio" id="star3_{{ output_des }}" name="main_rating" value="3">
             <label for="star3_{{ output_des }}"></label>
-            <input type="radio" id="star2_{{ output_des }}" name="main_rating" value="2" required>
+            <input type="radio" id="star2_{{ output_des }}" name="main_rating" value="2">
             <label for="star2_{{ output_des }}"></label>
-            <input type="radio" id="star1_{{ output_des }}" name="main_rating" value="1" required>
+            <input type="radio" id="star1_{{ output_des }}" name="main_rating" value="1">
             <label for="star1_{{ output_des }}"></label>
         </div>
     </div>
@@ -64,15 +67,15 @@
                         <td>{{ value }}</td>
                         <td>
                             <div class="rating">
-                                <input type="radio" id="star5_{{ key }}" name="{{ key }}" value="5" required>
+                                <input type="radio" id="star5_{{ key }}" name="{{ key }}" value="5">
                                 <label for="star5_{{ key }}"></label>
-                                <input type="radio" id="star4_{{ key }}" name="{{ key }}" value="4" required>
+                                <input type="radio" id="star4_{{ key }}" name="{{ key }}" value="4">
                                 <label for="star4_{{ key }}"></label>
-                                <input type="radio" id="star3_{{ key }}" name="{{ key }}" value="3" required>
+                                <input type="radio" id="star3_{{ key }}" name="{{ key }}" value="3">
                                 <label for="star3_{{ key }}"></label>
-                                <input type="radio" id="star2_{{ key }}" name="{{ key }}" value="2" required>
+                                <input type="radio" id="star2_{{ key }}" name="{{ key }}" value="2">
                                 <label for="star2_{{ key }}"></label>
-                                <input type="radio" id="star1_{{ key }}" name="{{ key }}" value="1" required>
+                                <input type="radio" id="star1_{{ key }}" name="{{ key }}" value="1">
                                 <label for="star1_{{ key }}"></label>
                             </div>
                         </td>
@@ -92,7 +95,7 @@
         <input type="submit" value="Give Suggestion">
     </div>
     {% endif %}
-<!-- </form> -->
+    </form>
 
 <div class="developer">Developed By</div>
 <div class="name">Harsh Jolapara💻</div>

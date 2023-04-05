@@ -3,6 +3,14 @@ import pickle
 import numpy as np
 import pandas as pd
 from numpy.linalg import norm
+from pymongo import MongoClient
+
+client = MongoClient('mongodb://localhost:27017/')
+db = client['ai_elective_subject']
+collection = db['electivesubjectfeedback']
+
+# initializing flask
+app = Flask('ElectiveRecommendation')
 
 with open('model.pickle', 'rb') as f:
     data = pickle.load(f)
@@ -26,9 +34,6 @@ cosine_similarities = []
 def checkIndexOrNot(output1,chain_zip):
     value = chain_zip.get(output1, 0)
     return value
-
-# initializing flask
-app = Flask('ElectiveRecommendation')
 
 @app.route('/',methods=['POST','GET'])
 def results():
@@ -108,6 +113,17 @@ def results():
         return render_template('index.html', semester=semester, description=description, output_des=output1, output_sem=output1_sem,output_dict=output_dict)
     
     else:
+        return render_template('index.html')
+
+# add feedback
+@app.route('/addfeedback', methods=['POST','GET'])
+def add_addfeedback():
+    if request.method == "POST":
+        feedbackname = request.form['feedbackname']
+        collection.insert_one({'name' : feedbackname})
+        message = "Feedback added successfully"
+        return render_template('index.html',message_feedback=message)
+    if request.method == "GET":
         return render_template('index.html')
 
 # run file
