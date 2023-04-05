@@ -122,6 +122,7 @@ def results():
     else:
         return render_template('index.html')
 
+
 # add feedback
 @app.route('/addfeedback', methods=['POST','GET'])
 def add_addfeedback():
