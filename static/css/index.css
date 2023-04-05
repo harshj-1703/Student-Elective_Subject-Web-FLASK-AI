@@ -99,7 +99,7 @@ tr:nth-child(even) {
 /* Styles for the recommended subject and semester */
 .recommendation {
     margin: 50px auto;
-    max-width: 800px;
+    max-width: 1000px;
     text-align: center;
     padding: 20px;
     background-color: #f2f2f2;
@@ -112,6 +112,41 @@ tr:nth-child(even) {
     margin-bottom: 10px;
 }
 
+.suggestion {
+    margin: 50px auto;
+    max-width: 1000px;
+    text-align: center;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 4px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.suggestion h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+#feedbackname {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    width: 300px;
+    margin-bottom: 10px;
+  }
+  
+  #feedbackname:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+  
+
 .recommendation p {
     font-size: 20px;
     margin-bottom: 20px;
@@ -120,7 +155,7 @@ tr:nth-child(even) {
 /* Styles for the table of another suggested subjects */
 .suggested {
     margin: 50px auto;
-    max-width: 800px;
+    max-width: 1000px;
     padding: 20px;
     background-color: #f2f2f2;
     border-radius: 4px;
@@ -155,7 +190,7 @@ font-size: 18px;
     background-color: #f2f2f2;
 }
 
-form {
+#form1 {
     background-color: #f2f2f2;
     padding: 20px;
     margin-bottom: 20px;
@@ -182,4 +217,28 @@ form {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
-    
+
+.rating {
+    display: inline-block;
+    font-size: 24px;
+}
+.rating input {
+    display: none;
+}
+.rating label {
+    color: #ddd;
+    float: right;
+}
+.rating label:before {
+    content: '\f005';
+    font-family: FontAwesome;
+    display: inline-block;
+    margin-right: 5px;
+}
+.rating input:checked ~ label:before {
+    color: #ffcc00;
+}
+/* Add custom styles for hover effect */
+.rating label:hover:before {
+    color: #ffcc00;
+}

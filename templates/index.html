@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elective Subject Recommendation</title>
     <link rel="stylesheet" href="../static/css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div id="loader"></div>
     <h1>Elective Subject Recommendation System</h1>
-    <form action="/" method="get">
+    <form action="/" method="get" id="form1">
         <label for="">Enter Semester:</label>
         <select name="semester" required id="semester-select">
             <option value="">Select Semester</option>
@@ -24,20 +25,27 @@
             <option value="8">8</option>
         </select>
         <label for="">Enter Description:</label>
-        <textarea name="description" required rows="3"></textarea>
+        <textarea name="description" required rows="3" oninput="limitTextarea(this)" maxlength="250"></textarea>
         <input type="submit" value="Recommend">
-        {% if error %}
-        <p id="semester-error" style="color: red;">{{ error }}</p>
-        {% else %}
-        <p id="semester-error"></p>
-        {% endif %}
     </form>
+    <!-- <form action=""> -->
     {% if output_sem is defined and output_des is defined %}
     <div class="recommendation">
         <h2>{{ output_des }} - Semester {{ output_sem }}</h2>
         <p>is your recommended subject</p>
+        <div class="rating">
+            <input type="radio" id="star5_{{ output_des }}" name="main_rating" value="5" required>
+            <label for="star5_{{ output_des }}"></label>
+            <input type="radio" id="star4_{{ output_des }}" name="main_rating" value="4" required>
+            <label for="star4_{{ output_des }}"></label>
+            <input type="radio" id="star3_{{ output_des }}" name="main_rating" value="3" required>
+            <label for="star3_{{ output_des }}"></label>
+            <input type="radio" id="star2_{{ output_des }}" name="main_rating" value="2" required>
+            <label for="star2_{{ output_des }}"></label>
+            <input type="radio" id="star1_{{ output_des }}" name="main_rating" value="1" required>
+            <label for="star1_{{ output_des }}"></label>
+        </div>
     </div>
-    {% endif %}
     {% if output_dict is defined and output_dict|length > 0 %}
     <div class="suggested">
         <h2>Another Suggested Subjects</h2>
@@ -54,19 +62,67 @@
                     <tr>
                         <td>{{ key }}</td>
                         <td>{{ value }}</td>
-                        <td>give</td>
+                        <td>
+                            <div class="rating">
+                                <input type="radio" id="star5_{{ key }}" name="{{ key }}" value="5" required>
+                                <label for="star5_{{ key }}"></label>
+                                <input type="radio" id="star4_{{ key }}" name="{{ key }}" value="4" required>
+                                <label for="star4_{{ key }}"></label>
+                                <input type="radio" id="star3_{{ key }}" name="{{ key }}" value="3" required>
+                                <label for="star3_{{ key }}"></label>
+                                <input type="radio" id="star2_{{ key }}" name="{{ key }}" value="2" required>
+                                <label for="star2_{{ key }}"></label>
+                                <input type="radio" id="star1_{{ key }}" name="{{ key }}" value="1" required>
+                                <label for="star1_{{ key }}"></label>
+                            </div>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
         </div>
     {% endif %}
+
+    <div class="suggestion">
+        <h2>Give FeedBack and Suggestion</h2>
+        <label for="">Enter Your Name :</label>
+        <input type="text" name="feedbackname" id="feedbackname" required maxlength="100">
+        <label for="">Enter FeedBack :</label>
+        <textarea name="suggestion" required rows="3" oninput="limitTextarea(this)" maxlength="250"></textarea>
+        <input type="submit" value="Give Suggestion">
+    </div>
+    {% endif %}
+<!-- </form> -->
 </body>
 <script>
+
+// const feedbackNameInput = document.getElementById('feedbackname');
+//     feedbackNameInput.addEventListener('input', function() {
+//         if (this.value.length > 100) {
+//             this.value = this.value.slice(0, 100);
+//         }
+//     });
+
+function limitTextarea(textarea) {
+    const MAX_WORDS = 250;
+    const words = textarea.value.trim().split(/\s+/).length;
+    if (words > MAX_WORDS) {
+        const truncatedText = textarea.value.trim().split(/\s+/).slice(0, MAX_WORDS).join(" ");
+        textarea.value = truncatedText;
+    }
+}
+
+document.querySelectorAll('.rating input').forEach(function(input) {
+    input.addEventListener('change', function() {
+        document.getElementById('selectedRating').innerText = this.value;
+    });
+});
+
 // Display the loader when the form is submitted
 document.querySelector('form').addEventListener('submit', function() {
     document.getElementById('loader').style.display = 'block';
 });
+
 // Hide the loader after the page is loaded
 window.onload = function() {
     document.getElementById('loader').style.display = 'none';
