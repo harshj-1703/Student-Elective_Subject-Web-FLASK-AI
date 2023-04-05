@@ -9,6 +9,11 @@ h1 {
     text-align: center;
     margin-top: 50px;
     margin-bottom: 30px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #003db7;
+    letter-spacing: 2px;
+    font-weight: 600;
+    font-variant: small-caps;
 }
 
 form {
@@ -241,4 +246,22 @@ font-size: 18px;
 /* Add custom styles for hover effect */
 .rating label:hover:before {
     color: #ffcc00;
+}
+
+.developer {
+  font-size: 16px;
+  font-weight: bold;
+  color: #5d5d5d;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  font-family:'Courier New', Courier, monospace;
+}
+
+.name {
+  font-size: 18px;
+  color: #003db7;
+  display: flex;
+  justify-content: center;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
