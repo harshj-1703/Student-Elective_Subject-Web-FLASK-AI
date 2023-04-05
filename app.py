@@ -76,8 +76,8 @@ def results():
         # cosine_similarities = cosine_similarities[:-1]
         # c_des.pop()
 
-        description = model.encode(description)
-        cosine_similarities = util.dot_score(description, trained_des)
+        new_description = model.encode(description)
+        cosine_similarities = util.dot_score(new_description, trained_des)
         index = (np.argmax(cosine_similarities)).item()
         # print(index)
         output1 = courses_dataset['Course Name'][index]
