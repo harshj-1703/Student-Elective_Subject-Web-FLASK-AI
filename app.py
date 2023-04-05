@@ -33,22 +33,41 @@ app = Flask('ElectiveRecommendation')
 @app.route('/',methods=['POST','GET'])
 def results():
     # form = request.form
-    cosine_similarities = []
     embeddings = []
+    cosine_similarities = []
     if request.args.get('semester') is not None and request.args.get('description') != '':
+        # c_des.append(request.args.get('description'))
+        # embeddings = model.encode(c_des)
+        # embeded = np.array(embeddings)
+        # array_len = len(embeded)
+        # # print(array_len)
+        # for i in range(0,array_len):
+        #     cosine = np.dot(embeded[array_len-1],embeded[i])/(norm(embeded[array_len-1])*norm(embeded[i]))
+        #     cosine_similarities.append(cosine)
+        # cosine_similarities.pop()
+        # c_des.pop()
+        # index = cosine_similarities.index(max(cosine_similarities))
+        
+        # output1 = courses_dataset['Course Name'][index]
+        # output1_sem = courses_dataset['Semester'][index]
+
         c_des.append(request.args.get('description'))
         embeddings = model.encode(c_des)
-        array_len = len(np.array(embeddings))
-        # print(array_len)
-        for i in range(0,array_len):
-            cosine = np.dot(np.array(embeddings)[array_len-1],np.array(embeddings)[i])/(norm(np.array(embeddings)[array_len-1])*norm(np.array(embeddings)[i]))
-            cosine_similarities.append(cosine)
-        cosine_similarities.pop()
+        embeded = np.array(embeddings)
+        array_len = len(embeded)
+        # Compute dot product of the last embedding with all other embeddings
+        dot_product = np.dot(embeded[array_len-1], embeded.T)
+        # Compute norms of all embeddings
+        norms = np.linalg.norm(embeded, axis=1)
+        # Compute cosine similarities
+        cosine_similarities = dot_product / (norms[array_len-1] * norms)
+        # Remove the last cosine similarity as it corresponds to the dot product of the last embedding with itself
+        cosine_similarities = cosine_similarities[:-1]
         c_des.pop()
-        index = cosine_similarities.index(max(cosine_similarities))
-        
+        index = np.argmax(cosine_similarities)
         output1 = courses_dataset['Course Name'][index]
         output1_sem = courses_dataset['Semester'][index]
+
 
         if(checkIndexOrNot(output1,chain1) != 0):
             final_chain = chain1
