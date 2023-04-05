@@ -10,7 +10,7 @@
 <body>
     <div id="loader"></div>
     <h1>Elective Subject Recommendation System</h1>
-    <form action="/" method="get" onsubmit="return validateSemester()">
+    <form action="/" method="get">
         <label for="">Enter Semester:</label>
         <select name="semester" required id="semester-select">
             <option value="">Select Semester</option>
@@ -63,22 +63,13 @@
     {% endif %}
 </body>
 <script>
-window.addEventListener("load", function() {
-const loader = document.getElementById("loader");
-loader.style.display = "none";
+// Display the loader when the form is submitted
+document.querySelector('form').addEventListener('submit', function() {
+    document.getElementById('loader').style.display = 'block';
 });
-
-function validateSemester() {
-  const semesterInput = document.getElementById('semester');
-  const semester = parseInt(semesterInput.value);
-  const semesterError = document.getElementById('semester-error');
-
-  if (isNaN(semester) || semester < 1 || semester > 8) {
-    semesterError.textContent = 'Semester must be a number between 1 and 8';
-    return false;
-  }
-
-  return true;
+// Hide the loader after the page is loaded
+window.onload = function() {
+    document.getElementById('loader').style.display = 'none';
 }
 </script>
 </html>

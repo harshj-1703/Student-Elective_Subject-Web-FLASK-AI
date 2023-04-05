@@ -51,7 +51,9 @@ def results():
         # output1 = courses_dataset['Course Name'][index]
         # output1_sem = courses_dataset['Semester'][index]
 
-        c_des.append(request.args.get('description'))
+        semester = request.args.get('semester')
+        description = request.args.get('description')
+        c_des.append(description)
         embeddings = model.encode(c_des)
         embeded = np.array(embeddings)
         array_len = len(embeded)
@@ -103,8 +105,6 @@ def results():
                 break
             if(output1 in output_dict):
                 del output_dict[output1]
-        semester = request.args.get('semester')
-        description = request.args.get('description')
         return render_template('index.html', semester=semester, description=description, output_des=output1, output_sem=output1_sem,output_dict=output_dict)
     
     else:
