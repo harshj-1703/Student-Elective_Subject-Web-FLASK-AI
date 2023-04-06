@@ -1,12 +1,8 @@
 from flask import Flask, render_template, request
 import pickle
 import numpy as np
-import pandas as pd
-from numpy.linalg import norm
 from pymongo import MongoClient
-import json
 from sentence_transformers import util
-import torch
 
 client = MongoClient('mongodb://localhost:27017/')
 db = client['ai_elective_subject']
